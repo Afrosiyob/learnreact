@@ -3,9 +3,18 @@ import React, { Fragment, useState } from 'react'
 const CounterC = () => {
 
 
+
     const [ count, setCount ] = useState( 0 )
     const [ colored, setColored ] = useState( false )
 
+    const type1 = {
+        msg: "hello"
+    }
+    const type2 = {
+        msg: "hello"
+    }
+
+    console.log( type1 === type2 );
 
     const increment = () => {
         setCount( count + 1 )

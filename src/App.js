@@ -8,8 +8,8 @@ const App = () => {
     <Fragment>
 
       {/* <CounterA /> */ }
-      {/* <CounterB /> */ }
-      <CounterC />
+      <CounterB />
+      {/* <CounterC /> */ }
     </Fragment>
   )
 }

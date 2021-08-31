@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import { store } from './redux/service/store.service';
+import Test from './Test';
+import UseCallback from './UseCallback';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={ store }>
-      <App />
-    </Provider>
+    <Test />
   </React.StrictMode>,
   document.getElementById( 'root' )
 );

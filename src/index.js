@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Test from './Test';
-import UseCallback from './UseCallback';
+import { BrowserRouter as Router } from 'react-router-dom';
+import ContextProvider from './context/ContextProvider';
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Test />
+    <Router>
+      <ContextProvider>
+        <Suspense fallback={ <div>...loading</div> }>
+          <App />
+        </Suspense>
+      </ContextProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById( 'root' )
 );

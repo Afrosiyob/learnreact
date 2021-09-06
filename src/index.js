@@ -5,18 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ContextProvider from './context/ContextProvider';
+import { Query } from './query/query';
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <ContextProvider>
-        <Suspense fallback={ <div>...loading</div> }>
+
+  <Router>
+    <ContextProvider>
+      <Suspense fallback={ <div>...loading</div> }>
+        <Query>
           <App />
-        </Suspense>
-      </ContextProvider>
-    </Router>
-  </React.StrictMode>,
+        </Query>
+      </Suspense>
+    </ContextProvider>
+  </Router>
+  ,
   document.getElementById( 'root' )
 );
 

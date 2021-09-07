@@ -1,5 +1,7 @@
 import React, { useContext, useReducer } from 'react'
-import { ThemeContext } from '../context/ContextProvider'
+import { ThemeContext } from '../context/context'
+
+
 
 
 

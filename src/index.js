@@ -4,20 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
-import ContextProvider from './context/ContextProvider';
-import { Query } from './query/query';
+
+
+
+
+import { QueryProvider, ThemeProvider } from './provider/provider';
 
 
 ReactDOM.render(
 
   <Router>
-    <ContextProvider>
-      <Suspense fallback={ <div>...loading</div> }>
-        <Query>
+    <Suspense fallback={ <div>...loading</div> }>
+      <ThemeProvider>
+        <QueryProvider>
           <App />
-        </Query>
-      </Suspense>
-    </ContextProvider>
+        </QueryProvider>
+      </ThemeProvider>
+    </Suspense>
   </Router>
   ,
   document.getElementById( 'root' )

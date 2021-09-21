@@ -1,6 +1,7 @@
 import axios from "axios";
 
 // delay
+
 export const delay = async (ms) =>
     await new Promise((resolve) => {
         setTimeout(() => {
@@ -9,6 +10,7 @@ export const delay = async (ms) =>
     });
 
 // with delay
+
 export const fetchWithDelay = async () => {
     try {
         await delay(300);
@@ -20,12 +22,25 @@ export const fetchWithDelay = async () => {
 };
 
 // without delay
+
 export const fetchWithoutDelay = async () =>
     await axios.get("url")
         .then((response) => ({ response }))
         .catch((error) => ({ error }))
 
-export const fetchGetPosts = async ({ queryKey }) => {
-    console.log(queryKey);
-    return await axios.get("https://jsonplaceholder.typicode.com/todos")
+// all api queres
+
+export const fetchList = async ({ queryKey }) => {
+    const [, params] = queryKey;
+    const { url } = params
+    return await axios.get(url)
 }
+
+export const fetchInfo = async ({ queryKey }) => {
+    const [, params] = queryKey;
+    const { url } = params
+    return await axios.get(url)
+}
+
+
+

@@ -1,24 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
-import { fetchGetPosts } from '../api/query.service'
+import { fetchList } from '../api/query.service'
 
 const Todos = () => {
 
+    const [todos, setTodos] = useState([])
+
     // Queries
-    const { isLoading, error, data } = useQuery(['todos', { note: "fetching todos" }], fetchGetPosts)
+    const { isLoading, error, data } = useQuery(['todos', { url: "https://jsonplaceholder.typicode.com/todos" }], fetchList, {
+        onSuccess: async () => {
+            console.log("success fetched");
+        }
+    })
 
-
-
+    useEffect(() => {
+        setTodos(data?.data)
+    }, [data, error])
 
     if (isLoading) return 'Loading...'
 
     if (error) return 'An error has occurred: ' + error.message
 
-    console.log(data);
-
     return (
         <div>
-            all todos
+            <ul>
+                {todos && todos.map((item, index) => (
+                    <li key={index}>
+                        {item?.title}
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }

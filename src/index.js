@@ -5,9 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes/Routes';
 import { Suspense } from 'react';
-import { QueryProvider } from './provider/provider';
-
-
+import { QueryProvider, ReduxProvider, ThemeProvider } from './provider/provider';
 
 
 ReactDOM.render(
@@ -15,7 +13,11 @@ ReactDOM.render(
     <BrowserRouter>
       <Suspense fallback={<div> ...loading </div>} >
         <QueryProvider>
-          <Routes />
+          <ThemeProvider>
+            <ReduxProvider>
+              <Routes />
+            </ReduxProvider>
+          </ThemeProvider>
         </QueryProvider>
       </Suspense>
     </BrowserRouter>

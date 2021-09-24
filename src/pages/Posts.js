@@ -1,33 +1,41 @@
-
-import React from 'react'
-import { useQuery, useQueryClient } from 'react-query'
-import { apiService } from '../api/api'
+import React, { useEffect, useState } from 'react'
+import { useQuery } from 'react-query'
+import { Link, useRouteMatch } from 'react-router-dom'
+import { fetchList } from '../api/query.service'
 
 const Posts = () => {
 
-    const queryClient = useQueryClient()
+    const [posts, setPosts] = useState([])
+    let { url } = useRouteMatch();
 
-    const { isLoading, isError, data, error } = useQuery( [ 'GET_POSTS', { name: "aforisyob" } ], apiService, {
-        onSuccess: () => console.log( "success fetching posts" )
-    } )
+    const { isLoading, error, data } = useQuery(["posts", { url: "https://jsonplaceholder.typicode.com/posts" }], fetchList, {
+        onSuccess: async () => {
+            console.log("success fetched");
+        }
+    })
 
-    console.log( "isLoading", isLoading );
-    console.log( "isError", isError );
-    console.log( "data", data );
-    console.log( "error", error );
+    useEffect(() => {
+        setPosts(data?.data)
+    }, [data])
+
+    if (isLoading) return 'Loading...'
+
+    if (error) return 'An error has occurred: ' + error.message
 
     return (
         <div>
-            there are posts
-            <button onClick={ async () => {
-                await queryClient.prefetchQuery(
-                    [ 'GET_POSTS', { name: "aforisyob" } ],
-                    apiService,
-                    // {
-                    //     staleTime: 10 * 1000, // only prefetch if older than 10 seconds
-                    // }
-                )
-            } } > refetching </button>
+            <ul>
+                {posts && posts?.map((el, index) => (
+                    <li key={index}>
+                        <Link
+                            to={{
+                                pathname: `${url}/${el?.id}`,
+                                state: { elData: el }
+                            }}
+                        > {el?.title} </Link>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
